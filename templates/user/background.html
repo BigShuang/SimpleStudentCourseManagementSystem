@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        学生选课管理系统
+    </title>
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="main-container">
+    <div class="main-header">
+        <div class="main-title">学生选课管理系统</div>
+        <div class="sub-title">Student Course Management System</div>
+        {% block welcome_message %}
+        {% endblock %}
+    </div>
+    <div class="login-container">
+        {% block login_container %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

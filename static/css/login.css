@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+}
+
+.main-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(118,93,183);
+    background: linear-gradient(90deg, rgb(165, 155, 190) 0%, rgba(72,42,150,1) 50%, rgb(165, 155, 190) 100%);
+}
+
+.main-header {
+    height: 45%;
+    text-align: center;
+    font-size: 40px;
+    color: #ffffff;
+}
+
+.main-header .main-title {
+    font-size: 50px;
+    padding-top: 5%;
+}
+
+.main-header .sub-tile {
+    padding: 1%;
+    color: #25c5ff
+}
+
+.main-header .welcome-message {
+    font-size: 26px;
+    margin-top: 60px;
+    color: #f8b285;
+}
+
+.login-container {
+    height: 40%;
+    width: 400px;
+    margin: 0 auto;
+    background: #eee;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 2px rgba(0,0,0,.33);
+    overflow: hidden;
+}
+
+
+.login-container .login-kind{
+    padding-top: 10%;
+    font-size: 30px;
+}
+
+
+.login-container .login-kind a {
+    text-decoration: none;
+    background: #4a2c98;
+    color: #eeeeee;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.login-container .student-login-button{
+}
+
+.login-container .teacher-login-button{
+}
+
+.hidden-kind {
+    display: none;
+}
+
+
+.teacher-form {
+    display: none;
+}
+
+
+.login-kind-title {
+    height: auto;
+    padding: 2%;
+    justify-content: center;
+    text-align: center;
+    color: #4d2f99;
+    width: 96%;
+    font-size: 22px;
+    display: block;
+    background: #ccc;
+    overflow: hidden;
+}
+
+
+.login-container .form p,
+.login-container .form .submit-button{
+    width: 90%;
+    padding-top: 4%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+}
+
+.login-container .form p label {
+    padding-right: 10px;
+    width: 80px;
+}
+
+.login-container .form p input {
+    clear: both;
+    padding: 8px;
+    width: 60%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container .form .submit-button ,
+.login-container .return-button{
+    margin: 5px auto 0;
+    padding-top: 20px;
+}
+
+.submit-button input,
+.submit-button a {
+    border: none;
+    text-decoration: none;
+    font-size: 18px;
+    background: #4a2c98;
+    color: #eeeeee;
+    padding: 5px 0;
+    text-align: center;
+    display: block;
+    width: 30%;
+    margin: 5px 10px;
+    border-radius: 10px;
+}
+
+.return-button a {
+    border: none;
+    text-decoration: none;
+    font-size: 18px;
+    background: #cccccc;
+    color: #4a2c98;
+    padding: 5px 0;
+    text-align: center;
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+

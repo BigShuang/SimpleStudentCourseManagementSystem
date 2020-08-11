@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Register
+    </title>
+    <link href="{% static 'css/register.css' %}" rel="stylesheet">
+</head>
+<body>
+
+    <div class="register-container">
+        <div class="register-title">修改个人信息</div>
+        <form method="post" class="form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <p><input type="submit" value="修改" class="submit-button"/></p>
+        </form>
+        <div class="return-button"><a href="{% url 'home' %}">返回上一页</a></div>
+
+    </div>
+</body>
