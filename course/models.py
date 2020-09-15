@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from user.models import Student, Teacher
+from constants import COURSE_STATUS
 
 
 def current_year():
@@ -26,15 +27,33 @@ class Course(models.Model):
     max_number = models.IntegerField(verbose_name="课程最大人数")
 
     year = models.IntegerField(verbose_name="年份", default=current_year)
-    semester = models.CharField(max_length=5, verbose_name="学期", choices=semesters)
+    semester = models.CharField(max_length=20, verbose_name="学期", choices=semesters)
 
     # 开始后老师无法再修改课程
     start_select = models.BooleanField(verbose_name="开始选课", default=False)
     # 结束后学生不可撤课
     end_select = models.BooleanField(verbose_name="结束选课", default=False)
+    # 结课后方可给学生打分
     is_end = models.BooleanField(verbose_name="是否结课", default=False)
 
     teacher = models.ForeignKey(Teacher, verbose_name="课程教师", on_delete=models.CASCADE)
+
+    def get_status(self):
+        # 未开始选课， 1
+        # 开始选课，未结束选课 2
+        # 结束选课， 3
+        # 结课 4
+        if not self.start_select:
+            return 1
+        elif not self.end_select:
+            return 2
+        elif not self.is_end:
+            return 3
+        else:
+            return 4
+
+    def get_status_text(self):
+        return COURSE_STATUS[self.get_status()]
 
 
 def weekday_choices():

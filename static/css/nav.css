@@ -1,0 +1,84 @@
+body,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+html,body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    /*background: #e6e6f0;*/
+    background: #ccc;
+}
+
+
+.nav {
+    background: #4a2c98;
+    position: fixed;
+    width: 100%;
+    color: #ccc;
+    z-index: 1;
+}
+
+
+.nav .nav-title,
+.nav .name-logo {
+    display: inline-block;
+    margin: 5px;
+}
+
+.nav p {
+    display: inline-block;
+    float: left;
+    padding-left: 10px;
+}
+
+.nav p.main-title {
+    font-size: 24px;
+    line-height: 26px;
+    height: 26px;
+}
+
+.nav p.sub-title {
+    width: 150px;
+    font-size: 14px;
+}
+
+.nav .name-logo {
+    float: right;
+    margin-top: 8px;
+}
+
+.nav .name-logo .user-name {
+    background: #ccc;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    color: #4a2c98;
+    text-align: center;
+    line-height: 24px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.nav .name-logo .user-name a {
+    text-decoration: none;
+}
+
+.nav .log-out {
+    display: inline-block;
+    float: right;
+    margin: 9px 5px 0;
+}
+
+.nav .log-out a {
+    margin: 5px;
+    background: #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 0 5px;
+}
+

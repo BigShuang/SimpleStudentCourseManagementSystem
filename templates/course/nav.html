@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+    <link href="{% static 'css/course_main.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="nav">
+    <div class="nav-title">
+        <p class="main-title">学生选课管理系统</p>
+{#        <p class="sub-title">Student Course Management System</p>#}
+    </div>
+
+    <div class="log-out">
+        <a href="{% url "logout" %}">退出</a>
+    </div>
+    <div class="name-logo">
+        <div class="user-name">
+            <a href="{% url 'update' kind=info.kind %}">
+                {{ info.name.0 }}
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+    {% block content %}{% endblock %}
+</div>
+
+
+</body>
+</html>

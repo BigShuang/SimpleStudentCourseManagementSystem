@@ -19,5 +19,8 @@ from course.views import *
 
 
 urlpatterns = [
-    path('<slug:kind>/', home, name="home"),
+    path('', to_home, name="course"),
+    path('<slug:kind>/', home, name="course"),
+    path('teacher/create_course', create_course, name="create_course"),
+
 ]

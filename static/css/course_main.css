@@ -1,0 +1,45 @@
+.main-content {
+    width: 900px;
+    margin: 0 auto;
+    background: #e6e6f0;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 60px 20px;
+    top: 0;
+}
+
+.main-container {
+    width: 850px;
+    margin: 0 auto;
+}
+
+.main-bar {
+    width: 850px;
+    height: 30px;
+}
+
+.main-bar .button {
+    width: 100px;
+    height: 30px;
+    vertical-align:top;
+    border:none;
+    color:#eee;
+    background:#4a2c98;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.main-bar .input{
+    width: 150px;
+    height: 24px;
+    margin: auto 10px;
+    vertical-align:top
+}
+
+.main-bar .right-button {
+    float: right;
+}
+
+

@@ -1,12 +1,12 @@
 # usr/bin/env python3
 # -*- coding:utf-8- -*-
-from django.shortcuts import render, reverse, redirect
-from django.http.response import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView, UpdateView
-
 import random
 
-from user.constants import INVALID_KIND
+from django.http.response import HttpResponse
+from django.shortcuts import render, reverse, redirect
+from django.views.generic import CreateView, UpdateView
+
+from constants import INVALID_KIND
 from user.forms import StuLoginForm, TeaLoginForm, StuRegisterForm, TeaRegisterForm, StuUpdateForm
 from user.models import Student, Teacher
 
@@ -51,7 +51,8 @@ def login(request, *args, **kwargs):
                         request.session['user'] = uid
                         request.session['id'] = user.id
                         # successful login
-                        return HttpResponseRedirect(reverse(kind + "home"))
+                        to_url = reverse("course", kwargs={'kind': kind})
+                        return redirect(to_url)
 
             return render(request, 'user/login_detail.html', {'form': form, 'kind': kind})
     else:
@@ -82,7 +83,7 @@ def logout(request):
         del request.session["user"]
     if request.session.get("id", ""):
         del request.session["id"]
-    return HttpResponseRedirect(reverse("login"))
+    return redirect(reverse("login"))
 
 
 def register(request, kind):
@@ -204,7 +205,7 @@ def update(request, kind):
             }
             return func(request, pk=pk, context=context)
         else:
-            return HttpResponseRedirect(reverse("login"))
+            return redirect(reverse("login"))
     else:
         return HttpResponse(INVALID_KIND)
 
@@ -213,11 +214,23 @@ class UpdateStudentView(UpdateView):
     model = Student
     form_class = StuUpdateForm
     template_name = "user/update.html"
-    success_url = "studenthome"
+    success_url = "course"
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateStudentView, self).get_context_data(**kwargs)
+        context.update(kwargs)
+        context["kind"] = "student"
+        return context
 
 
 class UpdateTeacherView(UpdateView):
     model = Teacher
     form_class = TeaRegisterForm
     template_name = "user/update.html"
-    success_url = "teacherhome"
+    success_url = "course"
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateTeacherView, self).get_context_data(**kwargs)
+        context.update(kwargs)
+        context["kind"] = "teacher"
+        return context

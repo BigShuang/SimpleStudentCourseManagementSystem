@@ -1,0 +1,64 @@
+table.item-list {
+    margin: 10px 0;
+    width: 850px;
+}
+
+.item-list th,
+.item-list td {
+    width: 20%;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+
+.item-list tr:nth-child(even) {
+    background-color: #dfdfdf;
+}
+
+.item-list th {
+    background-color: #9481c5;
+}
+
+
+
+/* for course table col width*/
+.item-list th.course-no,
+.item-list td.course-no {
+    width: 70px;
+}
+
+.item-list th.course-name,
+.item-list td.course-name {
+    width: 150px;
+}
+
+.item-list th.course-credit,
+.item-list td.course-credit {
+    width: 40px;
+}
+
+.item-list th.course-number,
+.item-list td.course-number {
+    width: 70px;
+}
+
+.item-list th.course-year,
+.item-list td.course-year {
+    width:  50px;
+}
+
+.item-list th.course-semester,
+.item-list td.course-semester {
+    width:  50px;
+}
+
+.item-list th.course-status,
+.item-list td.course-status {
+    width:  100px;
+}
+
+.item-list th.course-operation,
+.item-list td.course-operation {
+    width:  150px;
+}
