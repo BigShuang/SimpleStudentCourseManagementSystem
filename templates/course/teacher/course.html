@@ -1,0 +1,70 @@
+{% extends "course/nav.html" %}
+{% block title %}课程详情{% endblock %}
+{% block content %}
+    {% load static %}
+    <link href="{% static 'css/list.css' %}" rel="stylesheet">
+    <h3>课程详情</h3>
+    <table class="item-list detail-list">
+        <thead>
+            <tr>
+                <th>课程编号</th>
+                <th>名称</th>
+                <th>学分</th>
+                <th>当前人数/总人数</th>
+                <th>年份</th>
+                <th>学期</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ course.id }}</td>
+                <td>{{ course.name }}</td>
+                <td>{{ course.credit }}</td>
+                <td>{{ course.get_current_count }}/{{ course.max_number }}</td>
+                <td>{{ course.year }}</td>
+                <td>{{ course.get_semester_display }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>上课时间<input class="button" type="button" value="添加时间表" onclick=""/></h3>
+    <table class="item-list schedule-list">
+        <thead>
+            <tr>
+                <th class="schedule-no">编号</th>
+            </tr>
+        </thead>
+    </table>
+
+    <h3>学生列表</h3>
+    <table class="item-list student-list">
+        <thead>
+            <tr>
+                <th class="student-no">学生学号</th>
+                <th class="student-name">学生姓名</th>
+                <th class="student-email">学生邮箱</th>
+                <th class="student-score">得分</th>
+                <th class="student-comments">评价</th>
+                <th class="operation">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cs in course_students %}
+            <tr>
+                <td>{{ cs.student.number }}</td>
+                <td>{{ cs.student.name }}</td>
+                <td>{{ cs.student.email }}</td>
+                <td>
+                    {% if cs.scores == None %}-{% endif %}
+                    {% if cs.scores != None %}{{ cs.scores }}{% endif %}
+                </td>
+                <td>
+                    {% if cs.scores == None %}-{% endif %}
+                    {% if cs.scores != None %}{{ cs.comments }}{% endif %}
+                </td>
+                <td>操作</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

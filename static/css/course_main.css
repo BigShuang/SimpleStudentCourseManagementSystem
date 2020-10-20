@@ -15,13 +15,21 @@
     margin: 0 auto;
 }
 
+.main-content h3{
+    width: 850px;
+}
+
+.main-content .right-button{
+    float: right;
+    margin: 0 5px;
+}
+
 .main-bar {
     width: 850px;
     height: 30px;
 }
 
 .main-bar .button {
-    width: 100px;
     height: 30px;
     vertical-align:top;
     border:none;
@@ -40,6 +48,7 @@
 
 .main-bar .right-button {
     float: right;
+    margin: 0 5px;
 }
 
 

@@ -22,5 +22,8 @@ urlpatterns = [
     path('', to_home, name="course"),
     path('<slug:kind>/', home, name="course"),
     path('teacher/create_course', create_course, name="create_course"),
-
+    path('teacher/view_detail/<int:course_id>', view_detail, name="view_detail"),
+    path('student/view/<slug:view_kind>', view_course, name="view_course"),
+    path('student/operate/<int:course_id>/<slug:operate_kind>', operate_course, name="operate_course"),
+    path('teacher/handle_course/<int:course_id>/<slug:handle_kind>', handle_course, name="handle_course"),
 ]

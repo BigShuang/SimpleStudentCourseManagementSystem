@@ -5,8 +5,9 @@ table.item-list {
 
 .item-list th,
 .item-list td {
-    width: 20%;
-    padding: 8px;
+    box-sizing: content-box;
+    width: fit-content;
+    padding: 3px;
     text-align: left;
     border-bottom: 1px solid #C0C0C0;
 }
@@ -50,12 +51,17 @@ table.item-list {
 
 .item-list th.course-semester,
 .item-list td.course-semester {
-    width:  50px;
+    width:  30px;
 }
 
 .item-list th.course-status,
 .item-list td.course-status {
     width:  100px;
+}
+
+.item-list th.course-teacher,
+.item-list td.course-teacher {
+    width: 70px;
 }
 
 .item-list th.course-operation,

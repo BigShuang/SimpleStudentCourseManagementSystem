@@ -11,12 +11,33 @@ install method:
 pip3 install Django==2.2.11 -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
+## TODO
+- course detail html, teacher
+    see time Schedule
+    set time Schedule
+    see student
+    set score
+
+- student course table, course time, opeartion
+- search course
+
+python manage.py makemigrations
+python manage.py migrate
+
 ## TIPS
 #### account
 Teahcer:
 任猎城
 u: 1280000001
 p: 12345678
+镇天稽
+u: 1110000001
+p: 22334455
+
+Student:
+李大爽
+u: 2020000001
+p: libigshuang
 
 
 ## Problems
