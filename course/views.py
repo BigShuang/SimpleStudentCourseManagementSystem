@@ -3,7 +3,7 @@ from django.shortcuts import render, reverse, redirect
 from django.db.models import Q
 
 from constants import INVALID_KIND, INVALID_REQUEST_METHOD, ILLEGAL_KIND
-from course.forms import CourseForm
+from course.forms import CourseForm, ScheduleForm
 from course.models import Course, StudentCourse, Schedule
 from user.util import get_user
 
@@ -68,6 +68,47 @@ def create_course(request):
 
     return render(request, 'course/teacher/create_course.html', {'info': info, 'form': form})
 
+
+def create_schedule(request, course_id):
+    user = get_user(request, "teacher")
+    if not user:
+        return redirect(reverse("login", kwargs={"kind": "teacher"}))
+
+    info = {
+        "name": user.name,
+        "kind": "teacher",
+    }
+
+    course = Course.objects.get(pk=course_id)
+
+    if request.method == 'POST':
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.course = course
+            obj.save()
+
+            return redirect(reverse("view_detail", kwargs={"course_id": course_id}))
+    elif request.method == 'GET':
+        form = ScheduleForm()
+    else:
+        return HttpResponse(INVALID_REQUEST_METHOD)
+
+    return render(request, 'course/teacher/create_schedule.html', {'info': info, 'form': form, "course": course})
+
+
+def delete_schedule(request, schedule_id):
+    user = get_user(request, "teacher")
+    if not user:
+        return redirect(reverse("login", kwargs={"kind": "teacher"}))
+
+    schedule = Schedule.objects.get(pk=schedule_id)
+
+    course_id = request.GET.get("course_id") or schedule.course.id
+
+    schedule.delete()
+
+    return redirect(reverse("view_detail", kwargs={"course_id": course_id}))
 
 
 def handle_course(request, course_id, handle_kind):
@@ -152,7 +193,7 @@ def view_course(request, view_kind):
             my_cids = [c.course.id for c in my_course]
             course_list = [c for c in course_list if c.id not in my_cids]
         elif view_kind == "is_end":
-            course_list = [c.course for c in my_course if c.course.status >= 4]
+            course_list = [c for c in my_course if c.course.status >= 4]
 
     else:
         return HttpResponse(INVALID_REQUEST_METHOD)

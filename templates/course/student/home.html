@@ -27,19 +27,58 @@
                     <th class="course-no">课程编号</th>
                     <th class="course-name">名称</th>
                     <th class="course-credit">学分</th>
-                    <th class="course-number">当前人数<br>/总人数</th>
-                    <th class="course-year">年份</th>
-                    <th class="course-semester">学期</th>
+                    {% if view_kind == "is_end" %}
+                        <th class="course-year-semester">年份学期</th>
+                    {% else %}
+                        <th class="course-number">当前人数/<br>最大人数</th>
+                        <th class="course-year">年份</th>
+                        <th class="course-semester">学期</th>
+                    {% endif %}
                     <th class="course-teacher">教师</th>
                     <th class="course-schedule">上课时间</th>
-                    {% if view_kind == "is_end"%}
-                        <th class="course-score">得分</th>
+                    {% if view_kind == "is_end" %}
+                        <th class="course-scores">得分</th>
+                        <th class="course-comments">评语</th>
+                        {% if cs.rating == None %}
+                            <th class="course-operation">操作</th>
+                        {% else %}
+                            <th class="course-rating">学生评分</th>
+                            <th class="course-assessment">学生评价</th>
+                        {% endif %}
                     {% else %}
-                        <th class="course-operation">操作</th>
+                        <th class="course-operation student-course">操作</th>
                     {% endif %}
                 </tr>
             </thead>
             <tbody>
+            {% if view_kind == "is_end" %}
+                {# end course show student course #}
+                {% for sc in course_list %}
+                <tr id="course-id-{{ sc.course.id }}">
+                    <td class="course-no">{{ sc.course.id }}</td>
+                    <td class="course-name">{{ sc.course.name }}</td>
+                    <td class="course-credit">{{ sc.course.credit }}</td>
+                    <td class="course-year-semester">{{ sc.course.year }} {{ sc.course.get_semester_display }}</td>
+                    <td class="course-teacher">{{ sc.course.teacher.name }}</td>
+                    <td class="course-schedule">
+                        {% for schedule in sc.course.get_schedules %}
+                            <div>{{ schedule }}</div>
+                        {% endfor %}
+                    </td>
+                    <td class="course-scores">{{ sc.scores }}</td>
+                    <td class="course-comments">{{ sc.comments }}</td>
+                    {% if cs.rating == None %}
+                        <td class="course-operation student-course">
+                        <input class="button" type="button" value="评教"
+                               onclick='window.open("{% url 'evaluate' sc.id %}")' />
+                        </td>
+                    {% else %}
+                        <td class="course-rating">{{ sc.rating }}</td>
+                        <td class="course-assessment">{{ sc.assessment }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            {% else %}
                 {% for course in course_list %}
                 <tr id="course-id-{{ course.id }}">
                     <td class="course-no">{{ course.id }}</td>
@@ -49,11 +88,12 @@
                     <td class="course-year">{{ course.year }}</td>
                     <td class="course-semester">{{ course.get_semester_display }}</td>
                     <td class="course-teacher">{{ course.teacher.name }}</td>
-                    <td class="course-schedule"></td>
-                    {% if view_kind == "is_end"%}
-                        <td class="course-score">100</td>
-                    {% else %}
-                        <td class="course-operation">
+                    <td class="course-schedule">
+                        {% for schedule in course.get_schedules %}
+                            <div>{{ schedule }}</div>
+                        {% endfor %}
+                    </td>
+                        <td class="course-operation student-course">
                         {% if view_kind == "select"%}
                             <input class="button" type="button" value="选课"
                                    onclick='window.open("{% url 'operate_course' course.id 'select' %}")' />
@@ -63,12 +103,12 @@
                                    onclick='window.open("{% url 'operate_course' course.id 'withdraw' %}")' />
                         {% endif %}
                         {% if view_kind == "current"%}
-                            操作
+                            -
                         {% endif %}
                         </td>
-                    {% endif %}
                 </tr>
                 {% endfor %}
+            {% endif %}
             </tbody>
 
         </table>

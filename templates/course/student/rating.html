@@ -1,0 +1,17 @@
+{% extends "course/nav.html" %}
+{% block title %}评教{% endblock %}
+{% block content %}
+    <h3>评教</h3>
+    <div class="course-container">
+        <div class="form create-course-from">
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <div class="submit-button">
+                    <input type="submit" value="确定"/>
+                    <input type="button" value="返回" onclick='location.href="{{ return_url }}"' />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -48,6 +48,13 @@ class Course(models.Model):
         courses = StudentCourse.objects.filter(course=self, with_draw=False)
         return len(courses)
 
+    def get_schedules(self):
+        schedules = Schedule.objects.filter(course=self)
+        return schedules
+
+    def __str__(self):
+        return "%s (%s)" % (self.name, self.teacher.name)
+
 
 def weekday_choices():
     weekday_str = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
@@ -59,7 +66,7 @@ class Schedule(models.Model):
     start_time = models.TimeField(verbose_name="上课时间")
     end_time = models.TimeField(verbose_name="下课时间")
     location = models.CharField(max_length=100, verbose_name="上课地点")
-    remarks = models.CharField(max_length=100, verbose_name="备注")
+    remarks = models.CharField(max_length=100, verbose_name="备注", null=True, blank = True)
 
     start_week = models.IntegerField(verbose_name="第几周开始")
     end_week = models.IntegerField(verbose_name="第几周结束")
@@ -71,6 +78,17 @@ class Schedule(models.Model):
     week_interval = models.IntegerField(verbose_name="周间隔", choices=intervals, default=1)
 
     course = models.ForeignKey(Course, verbose_name="课程名", on_delete=models.CASCADE)
+
+    def __str__(self):
+        s = "第%s周-第%s周 " % (self.start_week, self.end_week)
+        if self.week_interval == 2:
+            s += "隔一周 "
+        s += "%s %s-%s " % (self.get_weekday_display(), self.start_time.strftime("%H:%M"),
+                            self.end_time.strftime("%H:%M"))
+        s += "在%s" % self.location
+        if self.remarks:
+            s += " %s" % self.remarks
+        return s
 
 
 class StudentCourse(models.Model):

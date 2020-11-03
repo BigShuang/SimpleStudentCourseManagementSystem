@@ -12,14 +12,11 @@ pip3 install Django==2.2.11 -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ## TODO
-- course detail html, teacher
-    see time Schedule
-    set time Schedule
-    see student
-    set score
-
-- student course table, course time, opeartion
+- student opeartion
 - search course
+- form css
+
+
 
 python manage.py makemigrations
 python manage.py migrate
