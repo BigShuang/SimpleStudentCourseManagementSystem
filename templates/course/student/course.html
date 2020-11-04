@@ -1,0 +1,31 @@
+{% extends "course/nav.html" %}
+{% block title %}课程详情{% endblock %}
+{% block content %}
+    {% load static %}
+    <link href="{% static 'css/details.css' %}" rel="stylesheet">
+    <h3>课程详情</h3>
+    <ul class="course-details">
+        <li class="course-detail"><span class="detail-name">课程编号</span> {{ object.course.id }}</li>
+        <li class="course-detail"><span class="detail-name">课程名</span> {{ object.course.name }}</li>
+        <li class="course-detail"><span class="detail-name">学分</span> {{ object.course.credit }}</li>
+        <li class="course-detail"><span class="detail-name">课程人数/最大人数</span> {{ object.course.get_current_count }}/{{ object.course.max_number }}</li>
+        <li class="course-detail"><span class="detail-name">年份</span> {{ object.course.year }}</li>
+        <li class="course-detail"><span class="detail-name">学期</span> {{ object.course.get_semester_display }}</li>
+
+        <li class="course-detail"><span class="detail-name">教师</span> {{ object.course.teacher.name }}</li>
+        <li class="course-detail"><span class="detail-name">上课时间</span>
+            <span class="course-schedules">
+            {% for schedule in object.course.get_schedules %}
+                <div class="course-schedule">{{ schedule }}</div>
+                <div class="course-schedule">{{ schedule }}</div>
+            {% endfor %}
+            </span>
+        </li>
+        <li class="course-detail"><span class="detail-name">得分</span> {{ object.scores }}</li>
+        <li class="course-detail"><span class="detail-name">评语</span> {{ object.comments }}</li>
+        <li class="course-detail"><span class="detail-name">学生评分</span> {{ object.rating }}</li>
+        <li class="course-detail"><span class="detail-name">学生评价</span> {{ object.assessment }}</li>
+
+    </ul>
+    <input type="button" value="返回" onclick='location.href="{% url 'view_course' 'is_end'%}"' />
+{% endblock %}

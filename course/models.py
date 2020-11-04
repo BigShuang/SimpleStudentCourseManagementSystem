@@ -98,7 +98,16 @@ class StudentCourse(models.Model):
 
     scores = models.IntegerField(verbose_name="成绩", null=True)
     comments = models.CharField(max_length=250, verbose_name="老师评价", null=True)
-    rating = models.IntegerField(verbose_name="学生评分", null=True)
+
+    rates = [
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+    ]
+
+    rating = models.IntegerField(verbose_name="学生评分", choices=rates, null=True, help_text="5分为最满意，最低分是1分")
     assessment = models.CharField(max_length=250, verbose_name="学生评价", null=True)
 
     student = models.ForeignKey(Student, on_delete=models.CASCADE)

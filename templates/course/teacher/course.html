@@ -51,7 +51,11 @@
         </tbody>
     </table>
 
-    <h3>学生列表</h3>
+    <h3>学生列表
+        {% if course.status == 4 %}
+            <input class="button right-button" type="button" value="给分完成" onclick='location.href="{% url 'handle_course' course.id 4%}"' />
+        {% endif %}
+    </h3>
     <table class="item-list student-list">
         <thead>
             <tr>
@@ -77,16 +81,41 @@
                     {% if cs.scores == None %}-{% endif %}
                     {% if cs.scores != None %}{{ cs.comments }}{% endif %}
                 </td>
-                <td class="operation">{% if cs.scores == None %}
-                        <input class="button right-button" type="button" value="给分"
-                           onclick='location.href="{% url 'score' cs.id%}"' />
+                <td class="operation">
+                    {% if course.status == 4 %}
+                        {% if cs.scores == None %}
+                            <input class="button right-button" type="button" value="给分"
+                               onclick='location.href="{% url 'score' cs.id%}"' />
+                        {% else %}
+                            <input class="button right-button" type="button" value="修改成绩"
+                               onclick='location.href="{% url 'score' cs.id%}?update=1"' />
+                        {% endif %}
                     {% else %}
-                        <input class="button right-button" type="button" value="修改成绩"
-                           onclick='location.href="{% url 'score' cs.id%}?update=1"' />
+                        -
                     {% endif %}
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    {% if course.status == 5 %}
+    <h3>学生评价</h3>
+    <table class="item-list student-list">
+        <thead>
+            <tr>
+                <th class="student-score">学生评分</th>
+                <th class="student-comments">学生评价</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cs in sorted_course_students %}
+            <tr>
+                <td>{{ cs.rating }}</td>
+                <td>{{ cs.assessment }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
 {% endblock %}

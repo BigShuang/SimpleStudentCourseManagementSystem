@@ -29,6 +29,10 @@
     height: 30px;
 }
 
+.main-bar .search-form {
+    display: inline-block;
+}
+
 .main-bar .button {
     height: 30px;
     vertical-align:top;

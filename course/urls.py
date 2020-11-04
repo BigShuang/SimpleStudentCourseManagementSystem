@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from course.views import *
-from course.cbvs import ScheduleDeleteView, ScoreUpdateView, RateUpdateView
+from course.cbvs import ScheduleDeleteView, ScoreUpdateView, RateUpdateView, StudentCourseDetailView
 
 urlpatterns = [
     path('', to_home, name="course"),
@@ -32,4 +32,5 @@ urlpatterns = [
     path('student/operate/<int:course_id>/<slug:operate_kind>', operate_course, name="operate_course"),
 
     path('student/evaluate/<int:pk>', RateUpdateView.as_view(), name="evaluate"),
+    path('student/view_detail/<int:pk>', StudentCourseDetailView.as_view(), name="sview_detail"),
 ]

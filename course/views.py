@@ -33,13 +33,26 @@ def teacher_home(request):
         "kind": "teacher",
     }
 
-    course_list = Course.objects.filter(teacher=user)
+    is_search = False
+    search_key = ""
+    if request.method == "POST":
+        search_key = request.POST.get("search")
+        if search_key:
+            is_search = True
 
-    return render(request, 'course/teacher/home.html', {'info': info, 'course_list': course_list})
+    context = {"info": info}
+    q = Q(teacher=user)
+    if is_search:
+        q = q & Q(name__icontains=search_key)
+        context["search_key"] = search_key
+
+    context["course_list"] = Course.objects.filter(q)
+
+    return render(request, 'course/teacher/home.html', context)
 
 
 def student_home(request):
-    return view_course(request, "current")
+    return redirect(reverse("view_course", kwargs={"view_kind": "current"}))
 
 
 def create_course(request):
@@ -119,6 +132,7 @@ def handle_course(request, course_id, handle_kind):
             1: "开始选课",
             2: "结束选课",
             3: "结课",
+            4: "给分完成"
     :return:
     """
     user = get_user(request, "teacher")
@@ -131,9 +145,25 @@ def handle_course(request, course_id, handle_kind):
     }
 
     course = Course.objects.get(pk=course_id)
-    if course.status == handle_kind:
-        course.status += 1
-        course.save()
+    if course.status == handle_kind and course.status < 5:
+        if course.status == 4:
+            scs = StudentCourse.objects.filter(course=course)
+            all_given = True
+            res = ""
+            for sc in scs:
+                if sc.scores is None:
+                    all_given = False
+                    res += "<div>%s 未打分</div>" % sc.student
+
+            if all_given:
+                course.status += 1
+                course.save()
+                return redirect(reverse("view_detail", kwargs={"course_id": course.id}))
+            else:
+                return HttpResponse(res)
+        else:
+            course.status += 1
+            course.save()
 
     course_list = Course.objects.filter(teacher=user)
     return render(request, 'course/teacher/home.html', {'info': info, 'course_list': course_list})
@@ -160,6 +190,10 @@ def view_detail(request, course_id):
         "schedules": sche_list
     }
 
+    if course.status == 5:
+        sorted_cs_list = sorted(c_stu_list, key=lambda cs: cs.scores)
+        context["sorted_course_students"] = sorted_cs_list
+
     return render(request, "course/teacher/course.html", context)
 
 
@@ -175,6 +209,13 @@ def view_course(request, view_kind):
     if not user:
         return redirect(reverse("login", kwargs={"kind": "student"}))
 
+    is_search = False
+    search_key = ""
+    if request.method == "POST":
+        search_key = request.POST.get("search")
+        if search_key:
+            is_search = True
+
     info = {
         "name": user.name,
         "kind": "student",
@@ -183,17 +224,27 @@ def view_course(request, view_kind):
     course_list = []
 
     if view_kind in ["select", "current", "withdraw", "is_end"]:
-        my_course = StudentCourse.objects.filter(Q(student=user) & Q(with_draw=False))
-        if view_kind == "current":
-            course_list = [c.course for c in my_course if c.course.status < 4]
-        elif view_kind == "withdraw":
-            course_list = [c.course for c in my_course if c.course.status == 2]
-        elif view_kind == "select":
-            course_list = Course.objects.filter(status=2)
+        if view_kind == "select":
+            q = Q(status=2)
+            if is_search:
+                q = q & (Q(name__icontains=search_key) | Q(teacher__name__icontains=search_key))
+
+            course_list = Course.objects.filter(q)
+
+            my_course = StudentCourse.objects.filter(Q(student=user) & Q(with_draw=False))
             my_cids = [c.course.id for c in my_course]
             course_list = [c for c in course_list if c.id not in my_cids]
-        elif view_kind == "is_end":
-            course_list = [c for c in my_course if c.course.status >= 4]
+        else:
+            q = Q(student=user) & Q(with_draw=False)
+            if is_search:
+                q = q & (Q(name__icontains=search_key) | Q(teacher__name__icontains=search_key))
+            my_course = StudentCourse.objects.filter(q)
+            if view_kind == "current":
+                course_list = [c.course for c in my_course if c.course.status < 4]
+            elif view_kind == "withdraw":
+                course_list = [c.course for c in my_course if c.course.status == 2]
+            elif view_kind == "is_end":
+                course_list = [c for c in my_course if c.course.status >= 4]
 
     else:
         return HttpResponse(INVALID_REQUEST_METHOD)
@@ -203,6 +254,8 @@ def view_course(request, view_kind):
         'view_kind': view_kind,
         'course_list': course_list
     }
+    if is_search:
+        context["search_key"] = search_key
 
     return render(request, 'course/student/home.html', context)
 

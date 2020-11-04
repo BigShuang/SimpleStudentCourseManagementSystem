@@ -1,4 +1,5 @@
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
+from django.views.generic.detail import DetailView
 from django.shortcuts import render, reverse, redirect
 
 # Relative import of GeeksModel
@@ -62,3 +63,18 @@ class RateUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse("view_course", kwargs={"view_kind": "is_end"})
+
+
+class StudentCourseDetailView(DetailView):
+    model = StudentCourse
+    template_name = 'course/student/course.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        if self.object:
+            context["info"] = {
+                "name": self.object.student.name,
+                "kind": "student",
+            }
+        return self.render_to_response(context)
