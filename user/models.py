@@ -25,6 +25,9 @@ class Student(models.Model):
             models.UniqueConstraint(fields=['grade', 'number'], name='student_id'),
         ]
 
+    def get_id(self):
+        return self.grade + self.number
+
     def __str__(self):
         return "%s (%s)" % (self.grade + self.number, self.name)
 

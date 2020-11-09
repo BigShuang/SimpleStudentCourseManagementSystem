@@ -6,15 +6,15 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgb(118,93,183);
-    background: linear-gradient(90deg, rgb(165, 155, 190) 0%, rgba(72,42,150,1) 50%, rgb(165, 155, 190) 100%);
+    background: #4a2c964d;
+    background: linear-gradient(rgba(230, 100, 101, 0.2), rgba(145, 152, 229, 0.3)), linear-gradient(#9198e560, #4a2c9880);
 }
 
 .main-header {
     height: 45%;
     text-align: center;
     font-size: 40px;
-    color: #ffffff;
+    color: #4a2c98;;
 }
 
 .main-header .main-title {
@@ -30,7 +30,7 @@ body {
 .main-header .welcome-message {
     font-size: 26px;
     margin-top: 60px;
-    color: #f8b285;
+    color: #ff5722;
 }
 
 .login-container {

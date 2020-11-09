@@ -46,7 +46,7 @@ def teacher_home(request):
         q = q & Q(name__icontains=search_key)
         context["search_key"] = search_key
 
-    context["course_list"] = Course.objects.filter(q)
+    context["course_list"] = Course.objects.filter(q).order_by('status')
 
     return render(request, 'course/teacher/home.html', context)
 

@@ -70,7 +70,7 @@
         <tbody>
             {% for cs in course_students %}
             <tr>
-                <td>{{ cs.student.number }}</td>
+                <td>{{ cs.student.get_id}}</td>
                 <td>{{ cs.student.name }}</td>
                 <td>{{ cs.student.email }}</td>
                 <td>
@@ -110,10 +110,12 @@
         </thead>
         <tbody>
             {% for cs in sorted_course_students %}
+            {% if cs.rating != None %}
             <tr>
                 <td>{{ cs.rating }}</td>
                 <td>{{ cs.assessment }}</td>
             </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>

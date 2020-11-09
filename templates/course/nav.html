@@ -12,8 +12,15 @@
 <body>
 <div class="nav">
     <div class="nav-title">
+        <a href="{% url 'course' kind=info.kind %}">
         <p class="main-title">学生选课管理系统</p>
-{#        <p class="sub-title">Student Course Management System</p>#}
+        <p class="sub-title">
+            {% if info.kind == "teacher" %}
+                教师端
+            {% elif info.kind == "student" %}
+                学生端
+            {% endif %}</p>
+        </a>
     </div>
 
     <div class="log-out">

@@ -71,10 +71,12 @@ table.item-list {
 
 .item-list th.course-schedule,
 .item-list td.course-schedule {
-    font-size: 10px;
     width: 200px
 }
 
+.item-list td.course-schedule {
+    font-size: 10px;
+}
 
 .item-list th.course-operation.student-course,
 .item-list td.course-operation.student-course {

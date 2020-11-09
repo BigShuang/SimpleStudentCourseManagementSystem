@@ -1,18 +1,17 @@
 {% extends "course/nav.html" %}
 {% block title %}创建时刻表{% endblock %}
 {% block content %}
-    <h3>创建时刻表</h3>
-    <div>{{ course.id }} - {{ course.name }}</div>
-    <div class="course-container">
-        <div class="form create-course-from">
-            <form method="post">
-                {% csrf_token %}
-                {{form.as_p}}
-                <div class="submit-button">
-                    <input type="submit" value="创建"/>
-                    <input type="button" value="返回"  onclick='window.open("{% url 'view_detail' course.id%}")' />
-                </div>
-            </form>
-        </div>
+    {% load static %}
+    <link href="{% static 'css/form.css' %}" rel="stylesheet">
+    <h3>创建时刻表:&nbsp;&nbsp;&nbsp;&nbsp;[{{ course.id }}] {{ course.name }}</h3>
+    <div class="form create-update-from">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div class="submit-button">
+                <input type="submit" value="创建"/>
+                <input type="button" value="返回"  onclick='window.open("{% url 'view_detail' course.id%}")' />
+            </div>
+        </form>
     </div>
 {% endblock %}

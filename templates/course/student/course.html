@@ -21,10 +21,18 @@
             {% endfor %}
             </span>
         </li>
-        <li class="course-detail"><span class="detail-name">得分</span> {{ object.scores }}</li>
-        <li class="course-detail"><span class="detail-name">评语</span> {{ object.comments }}</li>
-        <li class="course-detail"><span class="detail-name">学生评分</span> {{ object.rating }}</li>
-        <li class="course-detail"><span class="detail-name">学生评价</span> {{ object.assessment }}</li>
+        <li class="course-detail"><span class="detail-name">得分</span> 
+            {% if object.scores != None %}{{ object.scores }}{% else %} - {% endif %}
+        </li>
+        <li class="course-detail"><span class="detail-name">评语</span> 
+            {% if object.comments != None %}{{ object.comments }}{% else %} - {% endif %}
+        </li>
+        <li class="course-detail"><span class="detail-name">学生评分</span> 
+            {% if object.rating != None %}{{ object.rating }}{% else %} - {% endif %}
+        </li>
+        <li class="course-detail"><span class="detail-name">学生评价</span> 
+            {% if object.assessment != None %}{{ object.assessment }}{% else %} - {% endif %}
+        </li>
 
     </ul>
     <input type="button" value="返回" onclick='location.href="{% url 'view_course' 'is_end'%}"' />

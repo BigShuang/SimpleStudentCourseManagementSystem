@@ -1,0 +1,30 @@
+.create-update-from {
+    margin: 10px;
+}
+
+.create-update-from p{
+    padding: 5px;
+}
+
+
+.create-update-from p:nth-child(even) {
+    background-color: #dfdfdf;
+}
+
+.create-update-from p:nth-child(odd) {
+    background-color: #c8c8d2;
+}
+
+.create-update-from p label{
+    display:inline-block;
+    width: 200px;
+}
+
+.create-update-from .submit-button {
+    margin-top: 20px;
+}
+
+.create-update-from .submit-button input {
+    width: 80px;
+    margin-right: 20px;
+}

@@ -1,17 +1,17 @@
 {% extends "course/nav.html" %}
 {% block title %}创建课程{% endblock %}
 {% block content %}
-    <div>创建课程</div>
-    <div class="course-container">
-        <div class="form create-course-from">
-            <form method="post">
-                {% csrf_token %}
-                {{form.as_p}}
-                <div class="submit-button">
-                    <input type="submit" value="创建"/>
-                    <input type="button" value="返回"  onclick='window.open("{% url 'course' "teacher"%}")' />
-                </div>
-            </form>
-        </div>
+    {% load static %}
+    <link href="{% static 'css/form.css' %}" rel="stylesheet">
+    <h3>创建课程</h3>
+    <div class="form create-update-from">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div class="submit-button">
+                <input type="submit" value="创建"/>
+                <input type="button" value="返回"  onclick='window.open("{% url 'course' "teacher"%}")' />
+            </div>
+        </form>
     </div>
 {% endblock %}
