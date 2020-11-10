@@ -29,6 +29,12 @@ def check_login(func):
 
 
 def get_user(request, kind):
+    """
+
+    :param request:
+    :param kind: teacher or student
+    :return: return Teacher instance or Student instance
+    """
     if request.session.get('kind', '') != kind or kind not in ["student", "teacher"]:
         return None
 

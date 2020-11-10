@@ -7,7 +7,7 @@ from course.forms import CourseForm, ScheduleForm
 from course.models import Course, StudentCourse, Schedule
 from user.util import get_user
 
-from datetime import datetime
+from django.utils import timezone
 
 
 def to_home(request):
@@ -279,8 +279,10 @@ def operate_course(request, operate_kind, course_id):
         new_course = StudentCourse(student=user, course=course)
         new_course.save()
     elif operate_kind == "withdraw":
-        course = StudentCourse.objects.filter(course__id=course_id).get()
+        q = Q(course__id=course_id) & Q(student=user) & Q(with_draw=False)
+        course = StudentCourse.objects.filter(q).get()
         course.with_draw = True
-        course.with_draw_time = datetime.now()
+        course.with_draw_time = timezone.now()
+        course.save()
 
-    return redirect(reverse("view_course", kwargs={"view_kind": "select"}))
+    return redirect(reverse("view_course", kwargs={"view_kind": operate_kind}))
