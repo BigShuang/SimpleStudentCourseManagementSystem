@@ -2,7 +2,7 @@
 # -*- coding:utf-8- -*-
 import random
 
-from django.http.response import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import CreateView, UpdateView
 

@@ -1,0 +1,1 @@
+python "F:\UP PIG\blog\blogs_auto_updating\main.py" "F:\UP PIG\code\SSCMS\docs\auto_update\all.json"

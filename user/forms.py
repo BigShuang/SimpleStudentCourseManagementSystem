@@ -35,6 +35,8 @@ class StuRegisterForm(forms.ModelForm):
         if confirm_password != password:
             self.add_error('confirm_password', 'Password does not match.')
 
+        return cleaned_data
+
 
 class StuUpdateForm(StuRegisterForm):
     class Meta:
