@@ -1,5 +1,5 @@
 {
   "git_info": "F://UP PIG//code//SSCMS//docs//git_info",
   "config": "F://UP PIG//code//SSCMS//docs//auto_update//config.json",
-  "refresh_catalog": true
+  "refresh_catalog": false
 }

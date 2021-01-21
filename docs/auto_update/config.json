@@ -2,10 +2,12 @@
   "common": {
     "project": "F:\\UP PIG\\code\\SSCMS",
     "contents": "docs",
-    "imgs": "img",
+    "imgs": "docs\\img",
     "project-name": "SSCMS",
     "book-name": "Django 小实例S1 简易学生选课管理系统",
-    "layer": "one-linked"
+    "layer": "one-linked",
+    "info": "docs\\info"
+
   },
   "cnblogs":{
     "url": "https://www.cnblogs.com",
