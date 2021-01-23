@@ -78,3 +78,8 @@
     margin: 10px auto;
 }
 
+
+.register-container .return-button {
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
