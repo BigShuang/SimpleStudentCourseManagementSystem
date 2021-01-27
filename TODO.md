@@ -21,6 +21,7 @@ Django 采用了 MVT 的软件设计模式，即模型（Model），视图（Vie
 
 ## 对学习笔记的更新
 - 第二章 完成 2-2 URL详细匹配规则
+- 插入新的第五章： 对模型对象进行增删查改
 
 ---------------------
 
@@ -33,8 +34,6 @@ https://docs.djangoproject.com/en/2.2/ref/models/options/#unique-together
 - 第四章model添加1*：Meta 元数据
 https://docs.djangoproject.com/en/2.2/topics/db/models/#meta-options
 
-- 插入新的第五章： 对模型对象进行增删查改
-
 
 
 
@@ -42,7 +41,6 @@ https://docs.djangoproject.com/en/2.2/topics/db/models/#meta-options
 #### 中间小思考
 - 脚本生成文本展示文件路径结构
 |---
-
 
 
 
