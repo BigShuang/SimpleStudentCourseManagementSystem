@@ -18,6 +18,8 @@
 
 Django 采用了 MVT 的软件设计模式，即模型（Model），视图（View）和模板（Template）
 
+主页的url
+
 
 ## 对学习笔记的更新
 - 第二章 完成 2-2 URL详细匹配规则
