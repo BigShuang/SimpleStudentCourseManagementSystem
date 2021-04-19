@@ -112,6 +112,7 @@ class CreateStudentView(CreateView):
         if form.is_valid():
             return self.form_valid(form)
         else:
+            self.object = None
             return self.form_invalid(form)
 
     def form_valid(self, form):
