@@ -15,6 +15,7 @@ def home(request):
     return render(request, "user/login_home.html")
 
 
+# def login(request, kind)
 def login(request, *args, **kwargs):
     if not kwargs or "kind" not in kwargs or kwargs["kind"] not in ["teacher", "student"]:
         return HttpResponse(INVALID_KIND)

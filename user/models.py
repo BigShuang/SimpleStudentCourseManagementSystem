@@ -50,7 +50,7 @@ class Teacher(models.Model):
 
     class Meta:
         constraints = [
-            # 复合主键：保证 grade和number组合的student_id唯一
+            # 复合主键：保证 department_no 和number组合的 teacher_id 唯一
             models.UniqueConstraint(fields=['department_no', 'number'], name='teacher_id'),
         ]
 
