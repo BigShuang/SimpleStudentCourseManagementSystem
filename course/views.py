@@ -237,7 +237,7 @@ def view_course(request, view_kind):
         else:
             q = Q(student=user) & Q(with_draw=False)
             if is_search:
-                q = q & (Q(name__icontains=search_key) | Q(teacher__name__icontains=search_key))
+                q = q & (Q(course__name__icontains=search_key) | Q(course__teacher__name__icontains=search_key))
             my_course = StudentCourse.objects.filter(q)
             if view_kind == "current":
                 course_list = [c.course for c in my_course if c.course.status < 4]
